@@ -8,11 +8,14 @@ var Stack = function() {
   someInstance.push = function(value) {
     let index = someInstance.size();
     storage[index] = value;
+    return value;
   };
 
   someInstance.pop = function() {
     let index = someInstance.size() - 1;
+    let value = storage[index];
     delete storage[index];
+    return value;
   };
 
   someInstance.size = function() {
