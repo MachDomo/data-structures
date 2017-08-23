@@ -25,7 +25,9 @@ var stackMethods = {
     return this.storage[this.size()] = value;
   },
   pop: function() {
-
+    var value = this.storage[this.size() - 1];
+    delete this.storage[this.size() - 1];
+    return value;
   }
 };
 
