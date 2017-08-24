@@ -8,7 +8,7 @@ var Queue = function() {
 
 var queueMethods = {
   size: function() {
-
+    return Object.keys(this.storage).length;
   },
   enqueue: function() {
 
