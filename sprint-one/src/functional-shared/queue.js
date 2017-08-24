@@ -12,10 +12,12 @@ var queueMethods = {
   },
   enqueue: function(value) {
     this.storage[this.size() + this.count] = value;
-    this.count++;
   },
   dequeue: function() {
-
+    var variable = this.storage[this.count];
+    delete this.storage[this.count];
+    this.count++;
+    return variable;
   }
 };
 
