@@ -3,7 +3,7 @@ var Stack = function() {
   // but try not not reference your old code in writing the new style.
   // this = Object.create(this.prototype)
   this.storage = {};
-  // return this;
+
 };
 
 Stack.prototype.size = function() {
@@ -15,5 +15,7 @@ Stack.prototype.push = function(value) {
 };
 
 Stack.prototype.pop = function() {
-
+  var value = this.storage[this.size() - 1];
+  delete this.storage[this.size() - 1];
+  return value;
 };
