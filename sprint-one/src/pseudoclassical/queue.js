@@ -9,12 +9,15 @@ Queue.prototype.size = function() {
   return Object.keys(this.storage).length;
 };
 
-Queue.prototype.enqueue = function() {
-
+Queue.prototype.enqueue = function(value) {
+  this.storage[this.size() + this.count] = value;
 };
 
 Queue.prototype.dequeue = function() {
-
+  var value = this.storage[this.count];
+  delete this.storage[this.count];
+  this.count++;
+  return value;
 };
 
 
