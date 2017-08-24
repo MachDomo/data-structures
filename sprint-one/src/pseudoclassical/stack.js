@@ -19,3 +19,4 @@ Stack.prototype.pop = function() {
   delete this.storage[this.size() - 1];
   return value;
 };
+
