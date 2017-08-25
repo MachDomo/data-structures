@@ -2,10 +2,9 @@ var LinkedList = function() {
   var list = {};
   list.head = null;
   list.tail = null;
-  var arr = [];
 
   list.addToTail = function(value) {
-    arr.push(value);
+
     if (list.head === null) {
       list.head = Node(value);
       list.tail = list.head;
@@ -36,8 +35,9 @@ var LinkedList = function() {
   list.contains = function(target) {
     // should return a boolean
     // recursively check from head.values to head.next values
+
     var currentObject = list.head;
-    while(currentObject !== list.tail) {
+    while(currentObject !== null) {
       if(currentObject.value === target) {
         return true;
       } else {
@@ -46,7 +46,6 @@ var LinkedList = function() {
     }
     return false;
   };
-
   return list;
 };
 
