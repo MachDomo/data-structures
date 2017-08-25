@@ -8,7 +8,7 @@ var LinkedList = function() {
     if (list.head === null) {
       list.head = Node(value);
       list.tail = list.head;
-    } else if(list.head === list.tail) {
+    } else if (list.head === list.tail) {
       list.head.next = Node(value);
       list.tail = list.head.next;
     } else {
@@ -37,8 +37,8 @@ var LinkedList = function() {
     // recursively check from head.values to head.next values
 
     var currentObject = list.head;
-    while(currentObject !== null) {
-      if(currentObject.value === target) {
+    while (currentObject !== null) {
+      if (currentObject.value === target) {
         return true;
       } else {
         currentObject = currentObject.next;
