@@ -10,6 +10,7 @@ var Graph = function() {
 // Add a node to the graph, passing in the node's value.
 Graph.prototype.addNode = function(node) {
   this[node] = {value: node};
+  this[node].edge = {};
 };
 
 // Return a boolean value indicating if the value passed to contains is represented in the graph.
@@ -19,16 +20,16 @@ Graph.prototype.contains = function(target) {
 
 // Removes a node from the graph.
 Graph.prototype.removeNode = function(node) {
-  if (typeof this[node].edge === 'number') {
-    var otherEdge = this[node].edge;
-    delete this[otherEdge].edge;
+  var currentNodeEdge = this[node].edge;
+  for (var key in currentNodeEdge) {
+    delete this[key].edge[node];
   }
   delete this[node];
 };
 
 // Returns a boolean indicating whether two specified nodes are connected.  Pass in the values contained in each of the two nodes.
 Graph.prototype.hasEdge = function(fromNode, toNode) {
-  if (this[fromNode].edge === toNode && this[toNode].edge === fromNode) {
+  if (this[fromNode].edge[toNode] === toNode && this[toNode].edge[fromNode] === fromNode) {
     return true;
   } else {
     return false;
@@ -38,20 +39,24 @@ Graph.prototype.hasEdge = function(fromNode, toNode) {
 // Connects two nodes in a graph by adding an edge between them.
 Graph.prototype.addEdge = function(fromNode, toNode) {
   // add edge property to fromNode, set reference to toNode
-  this[fromNode].edge = this[toNode].value;
-  this[toNode].edge = this[fromNode].value;
+  this[fromNode].edge[toNode] = this[toNode].value;
+  this[toNode].edge[fromNode] = this[fromNode].value;
+
+
   // add edge property to toNode, set reference to fromNode
 };
 
 // Remove an edge between any two specified (by value) nodes.
 Graph.prototype.removeEdge = function(fromNode, toNode) {
-  delete this[fromNode].edge;
-  delete this[toNode].edge;
+  delete this[fromNode].edge[toNode];
+  delete this[toNode].edge[fromNode];
 };
 
 // Pass in a callback which will be executed on each node of the graph.
 Graph.prototype.forEachNode = function(cb) {
-
+  _.each(this, function(value, key, collection) {
+    cb(key);
+  });
 };
 
 /*
@@ -59,7 +64,7 @@ Graph.prototype.forEachNode = function(cb) {
  */
 
 // var graph = new Graph(); // {}
-// graph.addNode(1); // {1:1}
+// graph.addNode(1); // {1: {}, 2: {}}
 // console.log(graph.contains(1)); //true
 
 
